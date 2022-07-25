@@ -26,6 +26,7 @@ export enum ModelLibrary {
 	"fasttext"               = "fastText",
 	"stable-baselines3"      = "Stable-Baselines3",
 	"ml-agents"              = "ML-Agents",
+	"sample-factory"         = "Sample-Factory",
 }
 
 export const ALL_MODEL_LIBRARY_KEYS = Object.keys(ModelLibrary) as (keyof typeof ModelLibrary)[];
@@ -353,6 +354,9 @@ const nemo = (model: ModelData) => {
 	return command ?? `# tag did not correspond to a valid NeMo domain.`;
 };
 
+const sampleFactory = (model: ModelData) => 
+	`python -m sample_factory.huggingface.load_from_hub -r "${model.id}"`;
+
 //#endregion
 
 
@@ -490,6 +494,12 @@ export const MODEL_LIBRARIES_UI_ELEMENTS: { [key in keyof typeof ModelLibrary]?:
 		repoName: "ml-agents",
 		repoUrl:  "https://github.com/huggingface/ml-agents",
 		snippet:  mlAgents,
+	},
+	"sample-factory": {
+		btnLabel: "sample-factory",
+		repoName: "sample-factory",
+		repoUrl:  "https://github.com/alex-petrenko/sample-factory",
+		snippet:  sampleFactory,
 	},
 } as const;
 
